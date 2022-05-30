@@ -4,5 +4,5 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     quantity = models.IntegerField(default=0)
     value = models.FloatField(default=0)
-    image = models.CharField(max_length=500)
+    image = models.ImageField()
     active = models.BooleanField(default=1)
