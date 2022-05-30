@@ -7,6 +7,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", include("pets.urls")),
-    path("pets/", include("pets.urls")),
     path('admin/', admin.site.urls),
+    path("shoppingcart/", include("shoppingcart.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

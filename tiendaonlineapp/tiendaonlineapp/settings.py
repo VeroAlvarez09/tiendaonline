@@ -40,7 +40,8 @@ DJANDOG_APPS = [
 ]
 
 LOCAL_APPS = [
-    "pets.apps.PetsConfig"
+    "pets.apps.PetsConfig",
+    "shoppingcart.apps.ShoppingcartConfig",
 ]
 
 INSTALLED_APPS = DJANDOG_APPS + LOCAL_APPS
