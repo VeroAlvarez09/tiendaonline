@@ -6,3 +6,6 @@ class Product(models.Model):
     value = models.FloatField(default=0)
     image = models.ImageField(upload_to="pets/static/pets")
     active = models.BooleanField(default=1)
+
+    def __str__(self):
+        return self.name

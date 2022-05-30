@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import DocumentType,City, Department, Shopping
+
+admin.site.register(DocumentType)
+admin.site.register(Department)
+admin.site.register(City)
