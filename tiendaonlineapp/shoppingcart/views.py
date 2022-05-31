@@ -1,9 +1,13 @@
+from secrets import choice
 from django.utils import timezone
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from pets.models import Product
 from django.http import HttpResponseRedirect
 from .models import Shopping, City, Department, DocumentType
+from django.template.loader import get_template
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
 
 
 def index(request, product_id):
@@ -41,6 +45,7 @@ def finish(request, product_id):
                 date = timezone.now()
             )
             shopping.save()
+            send_user_mail(shopping)
         except Exception as e:
             return render(request,"shoppingcart/index.html",{
                 "product" : product,
@@ -52,3 +57,22 @@ def finish(request, product_id):
                 product.active = 0
             product.save()
             return HttpResponseRedirect(reverse("pets:index", args=(1,)))
+
+
+def send_user_mail(shopping):
+    subject = 'Compra exitosa en 4 Huellitas'
+    template = get_template('shoppingcart/email.html')
+
+    content = template.render({
+        'shopping': shopping,
+    })
+
+    message = EmailMultiAlternatives(subject,
+                                    "",
+                                    settings.EMAIL_HOST_USER,
+                                    [shopping.email],
+                                    cc=[settings.EMAIL_SHOPPING]
+                                    )
+
+    message.attach_alternative(content, 'text/html')
+    message.send()
