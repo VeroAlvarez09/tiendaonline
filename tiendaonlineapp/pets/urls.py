@@ -6,5 +6,6 @@ app_name = "pets"
 urlpatterns = [
     #ex /pets/
     path("",views.index, name="index"),
+    path("<int:message>/",views.index, name="index"),
    
 ]

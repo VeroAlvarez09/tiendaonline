@@ -20,13 +20,15 @@
                 </div>
                 <div class="panel-body">
                     <p>Estas a un paso de finalizar tu compra, luego de llenar los campos tendras el detalle de tu compra y un correo donde enviaremos una notificación.</p>
+                    {% if error_message %}
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> {{ error_message }}
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                    <div class="col-8">
                         <form action="{% url 'shoppingcart:finish' product.id %}" method="post">
                             {% csrf_token %}
-                            {% if error_message %}
-                                <p>
-                                    <strong>{{ error_message }}</strong>
-                                </p>
-                            {% endif %}
                             <div class="card">
                                 <h5 class="card-title text-center mt-3">DATOS DE ENTREGA</h5>
                                 <div class="card-body row">
@@ -35,12 +37,12 @@
                                         class="form-control" 
                                         placeholder="Nombres y apellidos completos"
                                         required
-                                        id="names_lastnames"
-                                        name="names_lastnames">
+                                        id="name_lastname"
+                                        name="name_lastname">
                                     </div>
                                     <div class="col-6">
-                                        <select class="form-select" aria-label="Default select example" required name="tipo_doc" id="tipo_doc">
-                                            <option selected>Tipo de documento</option>
+                                        <select class="form-select" aria-label="Default select example" required name="id_document_type" id="id_document_type">
+                                            <option selected value="">Tipo de documento</option>
                                             <option value="1">Cédula de ciudadanía</option>
                                             <option value="2">Cédula de extrajería</option>
                                         </select>
@@ -74,14 +76,14 @@
                                         name="direction">
                                     </div>
                                     <div class="col-6">
-                                        <select class="form-select" aria-label="Default select example" required name="department" id="department">
-                                            <option selected>Departamento</option>
+                                        <select class="form-select" aria-label="Default select example" required name="id_department" id="id_department">
+                                            <option selected value="">Departamento</option>
                                             <option value="1">Antioquia</option>
                                         </select>
                                     </div>
                                     <div class="col-6">
-                                        <select class="form-select" aria-label="Default select example" required name="city" id="city">
-                                            <option selected>Ciudad</option>
+                                        <select class="form-select" aria-label="Default select example" required name="id_city" id="id_city">
+                                            <option selected value="">Ciudad</option>
                                             <option value="1">Medellín</option>
                                             <option value="2">Envigado</option>
                                             <option value="3">Bello</option>
@@ -112,6 +114,17 @@
                                 </div>
                             </div>
                         </form>
+                    </div>    
+                    <div class="col-4">
+                            <div class="card">
+                                <img src="{{product.image}}" class="card-img-top p-3" alt="{{product.name}}" style="width: 250px; height: 210px;">
+                                <div class="card-body">
+                                <h5 class="card-title">{{product.name}}</h5>
+                                <p class="card-text">${{product.value}}</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

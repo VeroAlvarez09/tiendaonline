@@ -20,11 +20,16 @@
                 </div>
                 <div class="panel-body">
                     <p>Estas ubicado en la sección de compra, disfruta esta agradable experiencia de compra en la mejor tienda online 4 Huellitas.</p>
+                    {% if success_message %}
+                        <div class="alert alert-success">
+                            <strong>Felicitaciones!</strong> {{ success_message }}
+                        </div>
+                    {% endif %}
                     <div class="row">
                         {% for product in products %}
                             <div class="col-3" style="margin-top: 20px">
                                 <div class="card">
-                                    <img src="{{product.image|slice:"4:"}}" class="card-img-top" alt="{{produc.name}}" style="width: 250px; height: 210px;">
+                                    <img src="{{product.image}}" class="card-img-top" alt="{{product.name}}" style="width: 250px; height: 210px;">
                                     <div class="card-body">
                                     <h5 class="card-title">{{product.name}}</h5>
                                     <p class="card-text">${{product.value}}</p>
